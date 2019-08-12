@@ -20,10 +20,6 @@ for(var i = 0; i < table.rows.length; i++){
         let r = row.cells[j];
         r.addEventListener('click', ()=>{
             // console.log('click');
-            if(count === 9){
-                alert('Game Ended');
-                turn = true;
-            }
             if(turn){
                 r.innerHTML = 'X';
                 turn = false;
@@ -39,6 +35,13 @@ for(var i = 0; i < table.rows.length; i++){
                 checkHorizontal(r);
                 checkDiagonal(r);
                 count ++;
+            }
+
+            if(count === 9){
+                console.log(count);
+                alert('Game Ended');
+                turn = true;
+                clear();
             }
         })
     }
@@ -117,8 +120,7 @@ const checkDiagonal = (r) => {
             objDiag[dia3].push(val);
         }
     }
-    if(Object.keys.length > 0){
-
+    if(Object.keys(objDiag).length > 0){
         for(let key in objDiag){
             let checkX = objDiag[key].filter(ele => ele === 'X');
             let checkO = objDiag[key].filter(ele => ele === 'O');
@@ -175,4 +177,5 @@ const clear = () =>{
     objHor = {};
     objDiag = {};
     objVer = {};
+    console.log(count, objHor, objDiag, objVer, turn);
 }
