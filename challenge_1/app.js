@@ -4,10 +4,14 @@ const winRecord = document.getElementById('winRecord');
 
 let turn = true;
 let count = 0;
+var x = 0;
+var o = 0;
 
 clearButton.addEventListener('click', () => {
     clear();
 })
+
+winRecord.innerHTML = `X: ${x}, O: ${o}`
 
 for(var i = 0; i < table.rows.length; i++){
    let row = table.rows[i];
@@ -90,8 +94,9 @@ const checkDiagonal = (r) => {
 
     let dia = parseInt(event.target.id);
     let val = event.target.innerHTML;
-    let dia1 = [1,5,9];
-    let dia2 = [3,5,7];
+    let dia1 = [1,9];
+    let dia2 = [3,7];
+    let dia3 = [5];
 
     if(dia1.includes(dia)){
         if(!objDiag[dia1]){
@@ -105,9 +110,35 @@ const checkDiagonal = (r) => {
         } else {
             objDiag[dia2].push(val);
         }
+    }else if(dia3.includes(dia)){
+        if(!objDiag[dia3]){
+            objDiag[dia3] = [val]
+        } else {
+            objDiag[dia3].push(val);
+        }
     }
+    if(Object.keys.length > 0){
 
-    check(objDiag);
+        for(let key in objDiag){
+            let checkX = objDiag[key].filter(ele => ele === 'X');
+            let checkO = objDiag[key].filter(ele => ele === 'O');
+            if(checkX.length === 2 && objDiag['5'][0] === 'X'){
+                alert('You WON');
+                turn = true;
+                x = x+1;
+                winRecord.innerHTML = `X: ${x}, O: ${o}`
+                clear();
+            }
+    
+            if(checkO.length === 2 && objDiag['5'][0] === 'O'){
+                alert('The Other WON');
+                turn = false;
+                o = o +1;
+                winRecord.innerHTML = `X: ${x}, O: ${o}`
+                clear();
+            }
+        }
+    }
 };
 
 const check = (obj) =>{
@@ -117,10 +148,16 @@ const check = (obj) =>{
         if(checkX.length === 3){
             alert('You WON');
             turn = true;
+            x = x+1;
+            winRecord.innerHTML = `X: ${x}, O: ${o}`
             clear();
-        }else if(checkO.length === 3){
+        }
+        
+        if(checkO.length === 3){
             alert('The Other WON');
             turn = false;
+            o = o +1;
+            winRecord.innerHTML = `X: ${x}, O: ${o}`
             clear();
         }
     }
