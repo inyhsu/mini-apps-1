@@ -1,6 +1,8 @@
 const table = document.getElementById('tttTable');
 const clearButton = document.getElementById('clear');
 const winRecord = document.getElementById('winRecord');
+let nameX = prompt('Please input your name as X','No Name');
+let nameO = prompt('Please input your name as O', "The Other No Name");
 
 let turn = true;
 let count = 0;
@@ -11,7 +13,7 @@ clearButton.addEventListener('click', () => {
     clear();
 })
 
-winRecord.innerHTML = `X: ${x}, O: ${o}`
+winRecord.innerHTML = `X ${nameX}: ${x} VS. O ${nameO}: ${o}`
 
 for(var i = 0; i < table.rows.length; i++){
    let row = table.rows[i];
@@ -128,7 +130,7 @@ const checkDiagonal = (r) => {
                 alert('You WON');
                 turn = true;
                 x = x+1;
-                winRecord.innerHTML = `X: ${x}, O: ${o}`
+                winRecord.innerHTML = `X ${nameX}: ${x} VS. O ${nameO}: ${o}`
                 clear();
             }
     
@@ -136,7 +138,7 @@ const checkDiagonal = (r) => {
                 alert('The Other WON');
                 turn = false;
                 o = o +1;
-                winRecord.innerHTML = `X: ${x}, O: ${o}`
+                winRecord.innerHTML = `X ${nameX}: ${x} VS. O ${nameO}: ${o}`
                 clear();
             }
         }
@@ -151,7 +153,7 @@ const check = (obj) =>{
             alert('You WON');
             turn = true;
             x = x+1;
-            winRecord.innerHTML = `X: ${x}, O: ${o}`
+            winRecord.innerHTML = `X ${nameX}: ${x} VS. O ${nameO}: ${o}`
             clear();
         }
         
@@ -159,7 +161,7 @@ const check = (obj) =>{
             alert('The Other WON');
             turn = false;
             o = o +1;
-            winRecord.innerHTML = `X: ${x}, O: ${o}`
+            winRecord.innerHTML = `X ${nameX}: ${x} VS. O ${nameO}: ${o}`
             clear();
         }
     }

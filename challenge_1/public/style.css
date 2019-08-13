@@ -10,3 +10,7 @@ table td{
     margin: auto;
     width: 30%;
 }
+
+#winRecord{
+    margin-bottom: 10px;
+}
