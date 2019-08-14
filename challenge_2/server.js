@@ -2,22 +2,23 @@ const express = require('express')
 const app = express()
 const port = 3000
 const bodyParser = require('body-parser');
+//parse parameters from request body and get it inside scope of your POST handler
 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
 
+// app.set('view engine', 'ejs');
 app.use(express.static('client'));
-//This is a built-in middleware function in Express. It parses incoming requests with urlencoded payloads
-
 app.get('/', (req, res)=>{
-    res.render('index.html');
+    res.render('index.html')
 })
+
 
 app.post('/upload_json', (req, res) => {
     const jsonStuff = JSON.parse(req.body.value);
-    // console.log(jsonStuff);
+    console.log(jsonStuff);
     let obj = {};
     let arrKey =[];
     let arrVal =[];
@@ -49,7 +50,10 @@ app.post('/upload_json', (req, res) => {
 
     csv(obj)
     console.log('csv version', arrKey , arrVal);
-    res.redirect('/');
+    var context = `${arrKey}\n${arrVal}`
+    // res.sendFile(__dirname + 'index.html')
+    res.end(context);
+    // res.redirect('/')
 })
 
 
