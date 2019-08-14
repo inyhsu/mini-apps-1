@@ -41,19 +41,27 @@ app.post('/upload_json', (req, res) => {
 
     helper(jsonStuff);
     console.log('this is obj', obj);
-    const csv = (js) =>{
-        arrKey = Object.keys(js);
-        for(let key in js){
-            js[key].forEach(ele => arrVal.push(ele));
+    var context = '';
+    Object.keys(obj).forEach(ele => {
+        if(ele !== 'children'){
+            context += ' ' + ele
         }
+    });
+    context += `\n`;
+
+
+    for(let i = 0; i < obj['firstName'].length ; i++){
+        for(let key in obj){
+            if(obj[key][i] !== undefined){
+                
+                context += ' ' + obj[key][i];
+            }
+        }
+        context += `\n`;
     }
 
-    csv(obj)
-    console.log('csv version', arrKey , arrVal);
-    var context = `${arrKey}\n${arrVal}`
-    // res.sendFile(__dirname + 'index.html')
     res.end(context);
-    // res.redirect('/')
+
 })
 
 
