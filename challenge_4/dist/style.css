@@ -1,0 +1,11 @@
+#app{
+    margin: 5% 27%;
+}
+
+.square{
+    border: 1px solid pink;
+    padding: 5px;
+    width: 160px;
+    height: 160px;
+    margin: -3px;
+}
